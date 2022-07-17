@@ -1,11 +1,39 @@
-import React, { useEffect, useState } from "react";
-import  { emperors,names } from "./Emperors";
+import React, { useState } from "react";
+import augustus from "./img/Augustus.jpg"
+import arcadius from "./img/Arcadius.jpg"
+import aurelian from "./img/Aurelian.png"
+import caligula from "./img/Caligula.jpg"
+import caracalla from "./img/Caracalla.jpg"
+import claudius from "./img/Claudius.jpg"
+import constantine from "./img/Constantine.jpg"
+import domitian from "./img/Domitian.jpg"
+import galienus from "./img/Galienusi.jpg"
+import hadrian from "./img/Hadrian.jpg"
+import marcus from "./img/Marcus.jpg"
+import Phillipe from "./img/Phillipe.jpg"
+import severus from "./img/Severus.jpg"
+import tiberius from "./img/tiberius.jpg"
+import traian from "./img/Traian.jpg"
+import Vespasian from "./img/Vespasian.jpg"
+
+
+
+
+
+
+
+
+
+
+
+
+
+const chads =[augustus,arcadius,aurelian,caligula,caracalla,claudius,constantine,domitian,galienus,hadrian,marcus,Phillipe,severus,tiberius,traian,Vespasian]
+const names = ["Augustus","Arcadius","Aurelianus","Caligula","Caracalla","Claudius","Constantine the great","Domitian","Galienus","Hadrian","Marcus Aurelius","Phillipe Arabus","Septimius Severus","Tiberius","Traianus","Vespasianus"]
+
 
 function Container (){
-    function randomNumberInRange(min, max) {
-        // 👇️ get number between min (inclusive) and max (inclusive)
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-      }
+
       function randomUniqueNum(range, outputCount) {
 
         let arr = []
@@ -26,100 +54,91 @@ function Container (){
       const [winText,setWintext]= useState(" Memory game of Roman Emperors");
 const [score,setScore]= useState(0);
 const [dificulity,setDificulity]=useState(1)
-
+const [ceckArr, setCheckArr] = useState([])
 const [lvl, setLvl] = useState(randomUniqueNum(16,4))
 const [bestScore , seBestScore] = useState(0)
-function leShufle(score){
 
-  score++;
-console.log(score)
-if(score <4){
-  let arrr = randomUniqueNum(4,4)
-  let mix=[]
-  arrr.map((num)=>{
-  mix.push(lvl[num])
-  })
-  setLvl(mix)
-}
-  else if(score > 4){
-    let arrr = randomUniqueNum(8,8)
-    let mix=[]
-    arrr.map((num)=>{
-    mix.push(lvl[num])
-    })
-    setLvl(mix)
-  }else if(score > 8){
-    let arrr = randomUniqueNum(12,12)
-    let mix=[]
-    arrr.map((num)=>{
-    mix.push(lvl[num])
-    })
-    setLvl(mix)
-  }else if (score > 12){
-    let arrr = randomUniqueNum(16,16)
-    let mix=[]
-    arrr.map((num)=>{
-    mix.push(lvl[num])
-    })
-    setLvl(mix)
-  }
-}   
 
-function leCheck(score){
-score++;
-console.log(score)
-  if(score === 4){
-    console.log("jaj")
-    setLvl(randomUniqueNum(16,8))
-    document.querySelectorAll(".card"). removeAttribute("id") 
-    setDificulity(2)
-  }else if(score === 8){
-    setLvl(randomUniqueNum(16,12))
-    document.querySelectorAll(".card"). removeAttribute("id") 
-    setDificulity(3)
-  }else if (score === 12){
-    setLvl(randomUniqueNum(16,16))
-    document.querySelectorAll(".card"). removeAttribute("id") 
-    setDificulity(4)
-  }
-  else if (score === 16){
-    setLvl(randomUniqueNum(16,0))
-  setWintext("Glor to you will be know as the optimus princeps")
-  }
-  
-}
+function childClick (event){
+  let scoreCheck = score+1;
+console.log(ceckArr)
+ setCheckArr([...ceckArr,event.target.id])
 
-  const CardShuffle = (event)=>{
+
  
-    if( event.target.id==="clicked"){
+  if(ceckArr.includes(event.target.id)){
 if(score > bestScore){
   seBestScore(score)
 }
-      setScore(0)
+setDificulity(1)
+setLvl(randomUniqueNum(16,4))
+setScore(0)
+setCheckArr([])
+  }else{
+    setScore(score+1)
 
-      setLvl(randomUniqueNum(16,4))
-  document.querySelectorAll(".card"). removeAttribute("id") 
-      }else{
-        
-        setScore(score+1)
-      
-        event.target.setAttribute("id","clicked")
+    if(scoreCheck <4){
+      let arrr = randomUniqueNum(4,4)
+      let mix=[]
+      arrr.map((num)=>{
+      mix.push(lvl[num])
+      })
+      setLvl(mix)
+    }
+      else if(scoreCheck >= 4){
+        let arrr = randomUniqueNum(8,8)
+        let mix=[]
+        arrr.map((num)=>{
+        mix.push(lvl[num])
+        })
+        setLvl(mix)
+      }else if(scoreCheck > 12){
+        let arrr = randomUniqueNum(12,12)
+        let mix=[]
+        arrr.map((num)=>{
+        mix.push(lvl[num])
+        })
+        setLvl(mix)
+      }else if (scoreCheck > 24){
+        let arrr = randomUniqueNum(16,16)
+        let mix=[]
+        arrr.map((num)=>{
+        mix.push(lvl[num])
+        })
+        setLvl(mix)
       }
-     leShufle(score)
-      leCheck(score)
-
-
-
-  
-   
-    
-
-
-
-
-
-
+    if(scoreCheck === 4){
+        
+      setCheckArr([]);
+      
+      setLvl([])
+      setLvl(randomUniqueNum(16,8))
+          setDificulity(2)
+        }else if(scoreCheck === 12){
+          setLvl(randomUniqueNum(16,12))
+          setCheckArr([]);
+      
+          console.log("jaj")
+          setDificulity(3)
+        }else if (scoreCheck === 24){
+          setCheckArr([]);
+          setLvl(randomUniqueNum(16,16))
+      
+        
+          setDificulity(4)
+        }
+        else if (scoreCheck === 32){
+          setLvl(randomUniqueNum(16,0))
+        setWintext("Glor to you will be know as the optimus princeps")
+        setCheckArr([]);
+        }
   }
+
+ 
+
+
+}
+
 
     return <div className="container">
 <header> {winText}</header>
@@ -129,13 +148,13 @@ if(score > bestScore){
 
 {
   
-  lvl.map((numero)=>{
+  lvl.map((numero,index)=>{
 
-    return <div key={numero}   className="card" onClick={CardShuffle}>
+    return <div key={index} id={numero}  className="card" onClick={childClick} >
     
-    <img src={emperors[numero]}>
+    <img className="emperor-img" id={numero} onClick={childClick} src={chads[numero]}>
     </img>
-    <h1>{names[numero]}</h1>
+    <h1 className="emperor-text" id={numero}  onClick={childClick} > {names[numero]}</h1>
     
     
     
