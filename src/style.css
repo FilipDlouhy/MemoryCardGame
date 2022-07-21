@@ -93,8 +93,8 @@ justify-content: space-around;
     
     }
     .card img {
-        width: 160px;
-        height: 250px;
+        width: 142px;
+        height: 160px;
     }
   }
   @media only screen and (max-width: 1000px) {
@@ -109,8 +109,8 @@ justify-content: space-around;
         height: 220px;
     }
     .card img {
-        width: 120px;
-        height: 200px;
+        width: 102px;
+        height: 120px;
     }
     .card:hover{
         height:240px;
